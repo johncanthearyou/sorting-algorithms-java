@@ -14,5 +14,8 @@ public class SortingAlgorithms {
     // Shell sort
 
     public static void main(String[] args) {
+        System.out.println("##### START MAIN #####");
+
+        System.out.println("##### END MAIN #####");
     }
 }

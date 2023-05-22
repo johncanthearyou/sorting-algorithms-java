@@ -14,3 +14,9 @@ I will implement are as follows:
 This is, by no means, an exhaustive list of all sorting algorithms. I simply
 asked ChatGPT "What are the 10 most important sorting algorithms to learn?"
 on May 21st, 2023 (5/21/23).
+
+To run all the sorting algorithms, you need the java jdk installed and
+configured (it should depend on no specific version, but I used the RedHat
+openjdk 17) navigate to the directory `sorting-algorithms-java` and run the
+following command:
+    > java SortingAlgorithms.java
