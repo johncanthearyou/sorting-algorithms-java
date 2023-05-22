@@ -3,12 +3,11 @@ import java.util.Random;
 public class SortingAlgorithms {
     private static Random random = new Random();
 
-    // Bubble sort
     /**
      * bubbleSort is a naive sorting algorithm that involves iteratively 
      * 'bubbling' the i-th largest value in the array by comparing the i-th
      * value to the (i+1)-st. If the ith value is greater, the values are
-     * swapped.
+     * swapped. It was approximately O(n**2) time complexity.
      * 
      * @param arrayToSort the array to be sorted. this will get deep copied
      *                    before being sorted
