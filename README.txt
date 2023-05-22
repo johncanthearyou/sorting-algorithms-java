@@ -1,0 +1,16 @@
+    This is a personal project to increase my knowledge of fundamental sorting
+algorithms as well as to improve my Java skills in general. The ten algorithms
+I will implement are as follows:
+    1.  Quick sort
+    2.  Merge sort
+    3.  Heap sort
+    4.  Insertion sort
+    5.  Selection sort
+    6.  Bubble sort
+    7.  Radix sort
+    8.  Counting sort
+    9.  Bucket sort
+    10. Shell sort 
+This is, by no means, an exhaustive list of all sorting algorithms. I simply
+asked ChatGPT "What are the 10 most important sorting algorithms to learn?"
+on May 21st, 2023 (5/21/23).
