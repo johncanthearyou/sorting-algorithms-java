@@ -59,11 +59,37 @@ public class SortingAlgorithms {
         return arrayToSort;
     }
 
-    // Selection sort
-    // TODO: Implement
-    // TODO: Document
+    /**
+     * selectionSort involves iteratively finding the minimum value in the elements to 
+     * the left of it, then swapping the two (if they are not the same). We will do this
+     * until there are no more elements from which to find a minimum.
+     * 
+     * @param arrayToSort the array to sort
+     * @return int[] the selection sorted array
+     */
     public static int[] selectionSort(int[] arrayToSort) {
-        return null;
+        arrayToSort = deepcopyArray(arrayToSort);
+
+        for (int i = 0; i < arrayToSort.length - 1; i++) {
+            // find min value
+            int minIndex = i;
+            int minValue = arrayToSort[minIndex];
+            for (int j = i + 1; j < arrayToSort.length; j++) {
+                if (arrayToSort[j] < minValue) {
+                    minIndex = j;
+                    minValue = arrayToSort[j];
+                }
+            }
+
+            // swap 
+            if (minIndex != i) {
+                int tmp = arrayToSort[minIndex];
+                arrayToSort[minIndex] = arrayToSort[i];
+                arrayToSort[i] = tmp;
+            }
+        }
+
+        return arrayToSort;
     }
 
     // Merge sort
@@ -126,18 +152,23 @@ public class SortingAlgorithms {
     }
 
     private static void printArray(int[] arrayToPrint) {
-        System.out.print("{ " +arrayToPrint[0]);
-        for (int i = 1; i < arrayToPrint.length; i++) {
-            System.out.print(", " +arrayToPrint[i]);
+        if (arrayToPrint.length == 0) {
+            System.out.println("{ }");
         }
-        System.out.println("}");
+        else {
+            System.out.print("{ " +arrayToPrint[0]);
+            for (int i = 1; i < arrayToPrint.length; i++) {
+                System.out.print(", " +arrayToPrint[i]);
+            }
+            System.out.println(" }");
+        }
     }
 
     //////////
     // MAIN //
     //////////
     public static void main(String[] args) {
-        System.out.println("##### START MAIN #####");
+        System.out.println("##### START MAIN #####\n");
         int arrayLength = 10;
         if (args.length == 1) {
             arrayLength = Integer.parseInt(args[0]);
@@ -145,21 +176,28 @@ public class SortingAlgorithms {
 
         // Initialize randomized array to sort
         int[] arrayToSort = new int[arrayLength];
+        int upperBound = arrayLength * arrayLength;
         for (int i = 0; i < arrayToSort.length; i++) {
-            arrayToSort[i] = random.nextInt(arrayToSort.length * arrayToSort.length);
+            arrayToSort[i] = random.nextInt(upperBound);
         }
         System.out.print("Array to sort: ");
         printArray(arrayToSort);
 
         // Perform bubble sort
-        System.out.print("Bubble sorted: ");
+        System.out.print("1. Bubble sorted: ");
         int[] bubbleSorted = bubbleSort(arrayToSort);
         printArray(bubbleSorted);
 
-        System.out.print("Insertion sorted:");
+        System.out.print("2. Insertion sorted:");
         int[] insertionSorted = insertionSort(arrayToSort);
         printArray(insertionSorted);
 
-        System.out.println("##### END MAIN #####");
+        System.out.print("3. Selection sorted:");
+        int[] selectionSorted = selectionSort(arrayToSort);
+        printArray(selectionSorted);
+
+        // System.out.print("Original Array Object: ");
+        // printArray(arrayToSort);
+        System.out.println("\n##### END MAIN #####");
     }
 }
