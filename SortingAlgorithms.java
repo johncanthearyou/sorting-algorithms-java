@@ -7,7 +7,7 @@ public class SortingAlgorithms {
      * bubbleSort is a naive sorting algorithm that involves iteratively 
      * 'bubbling' the i-th largest value in the array by comparing the i-th
      * value to the (i+1)-st. If the ith value is greater, the values are
-     * swapped. It was approximately O(n**2) time complexity.
+     * swapped. It has approximately O(n**2) time complexity.
      * 
      * @param arrayToSort the array to be sorted. this will get deep copied
      *                    before being sorted
@@ -33,11 +33,30 @@ public class SortingAlgorithms {
         return arrayToSort;
     }
 
-    // Insertion sort
-    // TODO: Implement
-    // TODO: Document
+    /**
+     * insertionSort involves finding the correct spot for a target item in an array
+     * by swapping it with the left neighbor until either the neighbor is smaller than
+     * the target or the left end of the array has been reached. After that, move to 
+     * the right neighbor of the target's orignal position and repeat until there are
+     * no more items to 'insert'
+     * 
+     * @param arrayToSort, the array to be sorted
+     * @return int[], the insertion sorted array
+     */
     public static int[] insertionSort(int[] arrayToSort) {
-        return null;
+        arrayToSort = deepcopyArray(arrayToSort);
+
+        for (int i = 1; i < arrayToSort.length; i++) {
+            int currIdx = i - 1;
+            while (currIdx >= 0 && arrayToSort[currIdx] > arrayToSort[currIdx + 1]) {
+                int tmp = arrayToSort[currIdx];
+                arrayToSort[currIdx] = arrayToSort[currIdx + 1];
+                arrayToSort[currIdx + 1] = tmp;
+                currIdx = currIdx - 1;
+            }
+        }
+
+        return arrayToSort;
     }
 
     // Selection sort
@@ -119,9 +138,13 @@ public class SortingAlgorithms {
     //////////
     public static void main(String[] args) {
         System.out.println("##### START MAIN #####");
+        int arrayLength = 10;
+        if (args.length == 1) {
+            arrayLength = Integer.parseInt(args[0]);
+        }
 
         // Initialize randomized array to sort
-        int[] arrayToSort = new int[20];
+        int[] arrayToSort = new int[arrayLength];
         for (int i = 0; i < arrayToSort.length; i++) {
             arrayToSort[i] = random.nextInt(arrayToSort.length * arrayToSort.length);
         }
@@ -129,9 +152,13 @@ public class SortingAlgorithms {
         printArray(arrayToSort);
 
         // Perform bubble sort
-        int[] bubbleSortedArray = bubbleSort(arrayToSort);
         System.out.print("Bubble sorted: ");
-        printArray(bubbleSortedArray);
+        int[] bubbleSorted = bubbleSort(arrayToSort);
+        printArray(bubbleSorted);
+
+        System.out.print("Insertion sorted:");
+        int[] insertionSorted = insertionSort(arrayToSort);
+        printArray(insertionSorted);
 
         System.out.println("##### END MAIN #####");
     }
