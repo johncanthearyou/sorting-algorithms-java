@@ -1,3 +1,4 @@
+import java.util.Currency;
 import java.util.Random;
 
 public class SortingAlgorithms {
@@ -92,11 +93,65 @@ public class SortingAlgorithms {
         return arrayToSort;
     }
 
-    // Merge sort
-    // TODO: Implement
-    // TODO: Document
+    /**
+     * mergeSort involves recursively splitting the array into smaller sub-arrays
+     * and recombining them on the way back up the stack trace
+     * 
+     * @param arrayToSort the array to merge sort
+     * @return int[], the merge sorted array
+     */
     public static int[] mergeSort(int[] arrayToSort) {
-        return null;
+        arrayToSort = deepcopyArray(arrayToSort);
+        arrayToSort = mergeSort(arrayToSort, 0, arrayToSort.length - 1);
+        
+        return arrayToSort;
+    }
+
+    /**
+     * mergeSort involves recursively splitting the array into smaller sub-arrays
+     * and recombining them on the way back up the stack trace
+     * 
+     * @param arrayToSort the array to merge sort
+     * @param leftIdx, the left side of the subarray
+     * @param rightIdx, the right side of the subarray
+     * @return int[], the merge sorted array
+     */
+    private static int[] mergeSort(int[] arrayToSort, int leftIdx, int rightIdx) {
+        if (leftIdx < 0 || rightIdx >= arrayToSort.length || leftIdx > rightIdx) { 
+            return new int[0];
+        }
+        else if (rightIdx == leftIdx) {
+            return new int[] { arrayToSort[leftIdx] };
+        }
+        else {
+            int midpoint = leftIdx + (rightIdx-leftIdx)/2;
+            int[] leftMerge = mergeSort(arrayToSort, leftIdx, midpoint);
+            int leftMergeIdx = 0;
+            int[] rightMerge = mergeSort(arrayToSort, midpoint+1, rightIdx);
+            int rightMergeIdx = 0;
+
+            int[] merged = new int[rightIdx - leftIdx + 1];
+            int mergedIdx = 0;
+            while (leftMergeIdx < leftMerge.length && rightMergeIdx < rightMerge.length) {
+                if (leftMerge[leftMergeIdx] < rightMerge[rightMergeIdx]) {
+                    merged[mergedIdx] = leftMerge[leftMergeIdx];
+                    leftMergeIdx = leftMergeIdx + 1;     
+                }
+                else {
+                    merged[mergedIdx] = rightMerge[rightMergeIdx];
+                    rightMergeIdx = rightMergeIdx + 1;
+                }
+                mergedIdx = mergedIdx + 1;
+            }
+            while (leftMergeIdx < leftMerge.length) {
+                merged[mergedIdx++] = leftMerge[leftMergeIdx++];
+            }
+            while (rightMergeIdx < rightMerge.length) {
+                merged[mergedIdx++] = rightMerge[rightMergeIdx++];
+            }
+
+            return merged;
+        }
     }
 
     // Quick sort
@@ -195,6 +250,10 @@ public class SortingAlgorithms {
         System.out.print("3. Selection sorted:");
         int[] selectionSorted = selectionSort(arrayToSort);
         printArray(selectionSorted);
+
+        System.out.print("4. Merge sorted:");
+        int[] mergeSorted = mergeSort(arrayToSort);
+        printArray(mergeSorted);
 
         // System.out.print("Original Array Object: ");
         // printArray(arrayToSort);
